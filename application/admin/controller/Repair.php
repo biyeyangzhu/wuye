@@ -14,7 +14,7 @@ class Repair extends Admin
      */
     public function Index()
     {
-        $list = Db::name('repair')->select();
+        $list = Db::name('repair')->paginate(10);
         $this->assign('list', $list);
         return $this->fetch();
     }

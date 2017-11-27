@@ -1,62 +1,73 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\www\2think\public/../application/user/view/default/login\index.html";i:1511701813;s:70:"D:\www\2think\public/../application/user/view/default/base\common.html";i:1511687117;s:67:"D:\www\2think\public/../application/user/view/default/base\var.html";i:1496373782;}*/ ?>
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo config('WEB_SITE_TITLE'); ?></title>
-<link href="__STATIC__/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="__STATIC__/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="__STATIC__/bootstrap/css/docs.css" rel="stylesheet">
-<link href="__STATIC__/bootstrap/css/twothink.css" rel="stylesheet">
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\www\2think\public/../application/user/view/default/login\index.html";i:1511748165;s:70:"D:\www\2think\public/../application/user/view/default/base\common.html";i:1511747723;s:67:"D:\www\2think\public/../application/user/view/default/base\var.html";i:1496373782;}*/ ?>
+<!DOCTYPE html>
+    <html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <title>物业管理系统</title>
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="__STATIC__/bootstrap/js/html5shiv.js"></script>
-<![endif]-->
+        <!-- Bootstrap -->
+        <link href="__STATIC__/cute/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="__STATIC__/cute/css/style.css" rel="stylesheet">
 
-<!--[if lt IE 9]>
-<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
-<![endif]-->
-<!--[if gte IE 9]><!-->
-<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
-<!--<![endif]-->
-<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
-<?php echo hook('pageHeader'); ?>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    
+    <style>
+        .main{margin-bottom: 60px;}
+        .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
+    </style>
+    <?php echo hook('pageHeader'); ?>
 </head>
 <body>
-	<!-- 头部 -->
+<div class="main">
+    <!--导航部分-->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid text-center">
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="/" class="navbar-link">首页</a></p>
+            </div>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="#" class="navbar-link">服务</a></p>
+            </div>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="#" class="navbar-link">发现</a></p>
+            </div>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">我的</a></p>
+            </div>
+        </div>
+    </nav>
+    <!--导航结束-->
 
-	<!-- /头部 -->
-	
-	<!-- 主体 -->
-	
-<link href="__STATIC__/cute/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="__STATIC__/cute/css/style.css" rel="stylesheet">
-
-	<div id="main-container" class="container">
-	    <div class="row">
-	         
-	        
+    <div class="container-fluid">
+        
 <section>
+  <div class="container">
   <div class="span12">
     <form class="login-form" action="" method="post">
       <div class="control-group">
         <label class="control-label" for="inputEmail">用户名</label>
         <div class="controls">
-          <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+          <input type="text" id="inputEmail" class="form-control" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="inputPassword">密码</label>
         <div class="controls">
-          <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+          <input type="password" id="inputPassword"  class="form-control" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
         </div>
       </div>
       <div class="control-group">
-        <label class="control-label" for="inputPassword">验证码</label>
+        <label class="control-label" for="inputCaptcha">验证码</label>
         <div class="controls">
-          <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+          <input type="text" id="inputCaptcha" class="form-control" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
         </div>
       </div>
       <div class="control-group">
@@ -67,50 +78,26 @@
         <div class="controls Validform_checktip text-warning"></div>
       </div>
       <div class="control-group">
-        <div class="controls">
+        <div class="controls" >
           <label class="checkbox">
-            <input type="checkbox"> 自动登陆
+            <input type="checkbox" > 自动登陆
           </label>
-          <button type="submit" class="btn">登 陆</button>
+          <button type="submit" class="btn btn-primary onlineBtn">登 陆</button>
+          <span>还没有账号? <a href="<?php echo url('login/register'); ?>">立即注册</a></span>
         </div>
       </div>
     </form>
   </div>
-</section>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid text-center">
-    <div class="col-xs-3">
-      <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">首页</a></p>
-    </div>
-    <div class="col-xs-3">
-      <p class="navbar-text"><a href="fuwu.html" class="navbar-link">服务</a></p>
-    </div>
-    <div class="col-xs-3">
-      <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
-    </div>
-    <div class="col-xs-3">
-      <p class="navbar-text"><a href="<?php echo url('user/login/login'); ?>" class="navbar-link">我的</a></p>
-    </div>
   </div>
-</nav>
+</section>
 
-	    </div>
-	</div>
-
-	<script type="text/javascript">
-	    $(function(){
-	        $(window).resize(function(){
-	            $("#main-container").css("min-height", $(window).height() - 343);
-	        }).resize();
-	    })
-	</script>
-	<!-- /主体 -->
-
-	<!-- 底部 -->
-	
-
-
-	<script type="text/javascript">
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="__STATIC__/cute/jquery-1.11.2.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="__STATIC__/cute/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
 (function(){
 	var ThinkPHP = window.Think = {
 		"ROOT"   : "__ROOT__", //当前网站地址
@@ -122,7 +109,7 @@
 	}
 })();
 </script>
-	
+
 <script type="text/javascript">
 
     $(document)
@@ -163,12 +150,10 @@
     });
 </script>
  <!-- 用于加载js代码 -->
-	<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
-	<?php echo hook('pageFooter', 'widget'); ?>
-	<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
-		
-	</div>
-
-	<!-- /底部 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<?php echo hook('pageFooter', 'widget'); ?>
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+    
+</div>
 </body>
 </html>

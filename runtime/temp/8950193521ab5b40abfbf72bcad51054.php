@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:72:"D:\www\2think\public/../application/home/view/default/article\index.html";i:1496373782;s:70:"D:\www\2think\public/../application/home/view/default/base\common.html";i:1496373782;s:67:"D:\www\2think\public/../application/home/view/default/base\var.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:72:"D:\www\2think\public/../application/home/view/default/article\index.html";i:1496373782;s:70:"D:\www\2think\public/../application/home/view/default/base\common.html";i:1511687213;s:67:"D:\www\2think\public/../application/home/view/default/base\var.html";i:1496373782;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -38,12 +38,12 @@
 	                <span class="icon-bar"></span>
 	            </button>
 	            <div class="nav-collapse collapse">
-	                <ul class="nav"> 
+	                <ul class="nav">
 		                <?php $__NAV__ = \think\Db::name('Channel')->field(true)->where("status=1")->order("sort")->select();if(is_array($__NAV__) || $__NAV__ instanceof \think\Collection || $__NAV__ instanceof \think\Paginator): $i = 0; $__LIST__ = $__NAV__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$nav): $mod = ($i % 2 );++$i;if($nav['pid'] == '0'): ?>
 		                        <li>
 		                            <a href="<?php echo get_nav_url($nav['url']); ?>" target="<?php if($nav['target'] == '1'): ?>_blank<?php else: ?>_self<?php endif; ?>"><?php echo $nav['title']; ?></a>
 		                        </li>
-                        	<?php endif; endforeach; endif; else: echo "" ;endif; ?> 
+                        	<?php endif; endforeach; endif; else: echo "" ;endif; ?>
 	                </ul>
 	            </div>
 	            <div class="nav-collapse collapse pull-right">

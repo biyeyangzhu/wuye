@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"D:\www\2think\public/../application/home/view/default/index\index.html";i:1511701743;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:70:"D:\www\2think\public/../application/home/view/default/index\index.html";i:1511770952;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511765879;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>首页</title>
 
     <!-- Bootstrap -->
     <link href="__STATIC__/cute/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,21 +27,21 @@
 <div class="main">
     <!--导航部分-->
     <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container-fluid text-center">
-            <div class="col-xs-3">
-                <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">首页</a></p>
-            </div>
-            <div class="col-xs-3">
-                <p class="navbar-text"><a href="fuwu.html" class="navbar-link">服务</a></p>
-            </div>
-            <div class="col-xs-3">
-                <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
-            </div>
-            <div class="col-xs-3">
-                <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">我的</a></p>
-            </div>
+    <div class="container-fluid text-center">
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">首页</a></p>
         </div>
-    </nav>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">服务</a></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">发现</a></p>
+        </div>
+        <div class="col-xs-3">
+            <p class="navbar-text"><a href="<?php echo url('home/login/index'); ?>" class="navbar-link">我的</a></p>
+        </div>
+    </div>
+</nav>
     <!--导航结束-->
 
     <div class="container-fluid">
@@ -52,7 +52,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="<?php echo url('home/notice/index'); ?>">
                             <div class="indexLabel label-danger">
                                 <span class="glyphicon glyphicon-bullhorn"></span><br/>
                                 小区通知
@@ -60,7 +60,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="service.html">
+                        <a href="<?php echo url('home/service/index'); ?>">
                             <div class="indexLabel label-warning">
                                 <span class="glyphicon glyphicon-ok-circle"></span><br/>
                                 便民服务
@@ -68,7 +68,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="online.html">
+                        <a href="<?php echo url('home/repair/add'); ?>">
                             <div class="indexLabel label-info">
                                 <span class="glyphicon glyphicon-heart-empty"></span><br/>
                                 在线报修

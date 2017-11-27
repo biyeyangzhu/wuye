@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:72:"D:\www\2think\public/../application/admin/view/default/repair\index.html";i:1511750171;s:71:"D:\www\2think\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:78:"D:\www\2think\public/../application/admin/view/default/auth_manager\index.html";i:1496373782;s:71:"D:\www\2think\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -100,66 +100,62 @@
             
 
             
+	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>报修管理</h2>
+		<h2>权限管理</h2>
 	</div>
 
-	<div class="cf">
-		<a class="btn" href="<?php echo url('add'); ?>">新 增</a>
-		<button class="btn ajax-post confirm" url="<?php echo url('del'); ?>" target-form="ids">删 除</button>
-		<!-- 高级搜索 -->
-		<div class="search-form fr cf">
-			<div class="sleft">
-				<input type="text" name="name" class="search-input" value="<?php echo input('name'); ?>" placeholder="请输入报修人">
-				<a class="sch-btn" href="javascript:;" id="search" url="<?php echo url('index'); ?>"><i class="btn-search"></i></a>
-			</div>
-		</div>
-	</div>
+    <div class="tools auth-botton">
+        <a id="add-group" class="btn" href="<?php echo url('createGroup'); ?>">新 增</a>
+        <a url="<?php echo url('changestatus?method=resumeGroup'); ?>" class="btn ajax-post" target-form="ids" >启 用</a>
+        <a url="<?php echo url('changestatus?method=forbidGroup'); ?>" class="btn ajax-post" target-form="ids" >禁 用</a>
+        <a url="<?php echo url('changestatus?method=deleteGroup'); ?>" class="btn ajax-post confirm" target-form="ids" >删 除</a>
+    </div>
+	<!-- 数据列表 -->
 	<div class="data-table table-striped">
-		<form class="ids">
-		<table>
-			<thead>
-				<tr>
-					<th class="row-selected">
-						<input class="checkbox check-all" type="checkbox">
-					</th>
-					<th>报修单号</th>
-					<th>报修人</th>
-					<th>电话</th>
-                    <th>报修地址</th>
-                    <th>问题</th>
-                    <th>报修时间</th>
-                    <th>状态</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$repair): $mod = ($i % 2 );++$i;?>
-					<tr>
-						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="<?php echo $repair['id']; ?>"> </td>
-						<td><?php echo $repair['sn']; ?></td>
-						<td><?php echo $repair['name']; ?></td>
-						<td><?php echo $repair['tel']; ?></td>
-                        <td><?php echo $repair['address']; ?></td>
-                        <td><?php echo $repair['title']; ?></td>
-                        <td><?php echo time_format($repair['create_time']); ?></td>
-                        <td><?php echo !empty($repair['status'])?'未处理':'已处理'; ?></td>
-						<td>
-							<a title="编辑" href="<?php echo url('edit?id='.$repair['id']); ?>">编辑</a>
-							<a class="confirm ajax-get" title="删除" href="<?php echo url('del?id='.$repair['id']); ?>">删除</a>
-						</td>
-					</tr>
-				<?php endforeach; endif; else: echo "" ;endif; else: ?>
-				<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">用户组</th>
+		<th class="">描述</th>
+
+		<th class="">授权</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<?php if(!(empty($_list) || (($_list instanceof \think\Collection || $_list instanceof \think\Paginator ) && $_list->isEmpty()))): if(is_array($_list) || $_list instanceof \think\Collection || $_list instanceof \think\Paginator): $i = 0; $__LIST__ = $_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo $vo['id']; ?>" /></td>
+			<td><a href="<?php echo url('AuthManager/editgroup?id='.$vo['id']); ?>"><?php echo $vo['title']; ?></a> </td>
+			<td><span><?php echo mb_strimwidth($vo['description'],0,60,"...","utf-8"); ?></span></td>
+
+
+			<td><a href="<?php echo url('AuthManager/access?group_name='.$vo['title'].'&group_id='.$vo['id']); ?>" >访问授权</a>
+			<a href="<?php echo url('AuthManager/category?group_name='.$vo['title'].'&group_id='.$vo['id']); ?>" >分类授权</a>
+			<a href="<?php echo url('AuthManager/user?group_name='.$vo['title'].'&group_id='.$vo['id']); ?>" >成员授权</a>
+			</td>
+			<td><?php echo $vo['status_text']; ?></td>
+			<td><?php if($vo['status'] == '1'): ?>
+				<a href="<?php echo url('AuthManager/changeStatus?method=forbidGroup&id='.$vo['id']); ?>" class="ajax-get">禁用</a>
+				<?php else: ?>
+				<a href="<?php echo url('AuthManager/changeStatus?method=resumeGroup&id='.$vo['id']); ?>" class="ajax-get">启用</a>
 				<?php endif; ?>
-			</tbody>
-		</table>
-		</form>
-		<div class="page">
-			<?php echo $list->render(); ?>
-		</div>
+				<a href="<?php echo url('AuthManager/changeStatus?method=deleteGroup&id='.$vo['id']); ?>" class="confirm ajax-get">删除</a>
+                </td>
+		</tr>
+		<?php endforeach; endif; else: echo "" ;endif; else: ?>
+		<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+		<?php endif; ?>
+	</tbody>
+    </table>
 
 	</div>
+    <div class="page">
+        <?php echo $_page; ?>
+    </div>
 
         </div>
         <div class="cont-ft">
@@ -257,29 +253,9 @@
         }
     </script>
     
-<script type="text/javascript">
-    $(function() {
-        //搜索功能
-        $("#search").click(function () {
-            var url = $(this).attr('url');
-            var query = $('.search-form').find('input').serialize();
-            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
-            query = query.replace(/^&/g, '');
-            if (url.indexOf('?') > 0) {
-                url += '&' + query;
-            } else {
-                url += '?' + query;
-            }
-            window.location.href = url;
-        });
-        //回车搜索
-        $(".search-input").keyup(function (e) {
-            if (e.keyCode === 13) {
-                $("#search").click();
-                return false;
-            }
-        });
-    })
+<script type="text/javascript" charset="utf-8">
+    //导航高亮
+    highlight_subnav('<?php echo url('AuthManager/index'); ?>');
 </script>
 
 </body>
