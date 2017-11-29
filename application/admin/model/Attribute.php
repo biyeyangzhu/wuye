@@ -27,7 +27,7 @@ class Attribute extends Model {
         $data = empty($data) ? \think\Request::instance()->post() : $data;  
         /* 获取数据对象 */ 
         $validate = validate('Attribute');
-         
+
         /* 添加或新增属性 */
         if(empty($data['id'])){ //新增属性  
         	if(!$validate->check($data)){

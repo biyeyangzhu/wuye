@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:71:"D:\www\2think\public/../application/home/view/default/notice\index.html";i:1511772714;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511765879;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:71:"D:\www\2think\public/../application/home/view/default/notice\index.html";i:1511927722;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511918909;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -38,11 +38,12 @@
             <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">发现</a></p>
         </div>
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="<?php echo url('home/login/index'); ?>" class="navbar-link">我的</a></p>
+            <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">我的</a></p>
         </div>
     </div>
 </nav>
     <!--导航结束-->
+    <div id="mydiv">
     <?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?>
     <div class="container-fluid">
         <div class="row noticeList">
@@ -61,10 +62,33 @@
     <?php endforeach; endif; else: echo "" ;endif; else: ?>
     <td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
     <?php endif; ?>
+    </div>
+    <a id='get' class='btn btn-info center-block'>获取更多数据</a>
 </div>
+
+<input type="hidden" value="1" id="zhi">
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="__STATIC__/cute/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="__STATIC__/cute/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $('#get').click(function () {
+        var page=parseInt($('#zhi').val());
+//        console.debug(typeof page);
+
+
+        $.get("<?php echo url('home/notice/index1'); ?>",{page:page},function (msg) {
+
+            $('#zhi').val(page+1);
+            if(msg){
+                $(msg).appendTo('#mydiv');
+            }else {
+              $('#get').html("aOh! 暂时还没有内容!")
+            }
+
+        })
+    })
+</script>
 </body>
 </html>

@@ -2,6 +2,8 @@
 namespace app\home\controller;
 
 use app\home\model\Document;
+use app\home\model\Picture;
+use think\Db;
 
 
 class Notice extends Home
@@ -18,6 +20,38 @@ class Notice extends Home
         }
         $this->assign('list', $list);
        return $this->fetch();
+    }
+    public function Index1($page){
+        $Document = new Document();
+        $page = $page*3;
+        $list = $Document->lists(43,$page);
+//获取封面
+
+        if($list){
+            $html='';
+            foreach ($list as $item){
+                $img = Db::name('picture')->where('id',$item['cover_id'])->select();
+                $img[0]['path']=  $img[0]['path']?$img[0]['path']:'/static/static/nopic.jpg';
+                $html.=  '<div class="container-fluid" id="2">
+        <div class="row noticeList">
+            <a href="/public/home/notice/detail/id/'.$item['id'].'.html">
+            <div class="col-xs-2">
+                <img class="noticeImg" src="/public'.$img[0]['path'].'" />
+            </div>
+            <div class="col-xs-10">
+                <p class="title">'.$item['title'].'</p>
+                <p class="intro">'.$item['description'].'</p>
+                <p class="info">浏览: '.$item['view'].' <span class="pull-right">'.$item['create_time'].'</span> </p>
+            </div>
+            </a>
+        </div>
+    </div>';
+            }
+            return $html;
+        }else{
+            return null;
+        }
+
     }
 
     /**

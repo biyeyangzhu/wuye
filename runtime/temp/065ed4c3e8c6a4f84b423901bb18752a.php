@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:70:"D:\www\2think\public/../application/home/view/default/index\index.html";i:1511770952;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511765879;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:70:"D:\www\2think\public/../application/home/view/default/index\index.html";i:1511925238;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511918909;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -38,7 +38,7 @@
             <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">发现</a></p>
         </div>
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="<?php echo url('home/login/index'); ?>" class="navbar-link">我的</a></p>
+            <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">我的</a></p>
         </div>
     </div>
 </nav>
@@ -76,7 +76,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="<?php echo url('home/business/index'); ?>">
                             <div class="indexLabel label-success">
                                 <span class="glyphicon glyphicon-briefcase"></span><br/>
                                 商家活动
@@ -84,7 +84,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="zushou.html">
+                        <a href="<?php echo url('home/repair/add'); ?>">
                             <div class="indexLabel label-primary">
                                 <span class="glyphicon glyphicon-usd"></span><br/>
                                 小区租售
@@ -92,7 +92,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="<?php echo url('home/activity/index'); ?>">
                             <div class="indexLabel label-default">
                                 <span class="glyphicon glyphicon-apple"></span><br/>
                                 小区活动

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:72:"D:\www\2think\public/../application/home/view/default/service\index.html";i:1511765841;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511765879;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:72:"D:\www\2think\public/../application/home/view/default/service\index.html";i:1511772558;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1511918909;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -38,7 +38,7 @@
             <p class="navbar-text"><a href="<?php echo url('home/index/index'); ?>" class="navbar-link">发现</a></p>
         </div>
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="<?php echo url('home/login/index'); ?>" class="navbar-link">我的</a></p>
+            <p class="navbar-text"><a href="<?php echo url('user/login/index'); ?>" class="navbar-link">我的</a></p>
         </div>
     </div>
 </nav>
@@ -48,7 +48,7 @@
         <div class="row noticeList">
             <a href="<?php echo url('detail?id='.$list['id']); ?>">
             <div class="col-xs-2">
-                <img class="noticeImg" src="__STATIC__/cute/image/1.png" />
+                <img class="noticeImg" src="__ROOT__<?php echo get_cover_path($data['cover_id']); ?>" />
             </div>
             <div class="col-xs-10">
                 <p class="title"><?php echo $list['title']; ?></p>

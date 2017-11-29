@@ -41,8 +41,13 @@ class Document extends Base {
     protected function setPositionAttr($value){
         return $this->getPosition($value);
     }
-    protected function setDeadlineAttr($value){
+    //deadline已经自动转换成时间戳修复截止日期不能正常保存的bug
+    /*protected function setDeadlineAttr($value){
         return strtotime($value);
+    }*/
+
+    protected function getDeadlineAttr($value){
+        return date("Y-m-d H:i:s",$value);
     }
     protected function setUpdateTimeAttr(){
         return time();
