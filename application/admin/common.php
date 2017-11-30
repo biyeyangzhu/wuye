@@ -231,6 +231,20 @@ function int_to_string(&$data,$map=array('status'=>array(1=>'正常',-1=>'删除
     return $data;
 }
 
+function int_to_status(&$data,$map=array('status'=>array(1=>'亲属',0=>'业主',2=>'租户'))) {
+    if($data === false || $data === null ){
+        return $data;
+    }
+    $data = (array)$data;
+    foreach ($data as $key => $row){
+        foreach ($map as $col=>$pair){
+            if(isset($row[$col]) && isset($pair[$row[$col]])){
+                $data[$key][$col.'_text'] = $pair[$row[$col]];
+            }
+        }
+    }
+    return $data;
+}
 /**
  * 动态扩展左侧菜单,base.html里用到 * @author 艺品网络 <twothink.cn>
  */

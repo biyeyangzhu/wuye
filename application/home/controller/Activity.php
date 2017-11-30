@@ -2,6 +2,8 @@
 namespace app\home\controller;
 
 use app\home\model\Document;
+use app\home\model\MemberActivity;
+use think\Db;
 
 
 class Activity extends Home
@@ -42,11 +44,20 @@ class Activity extends Home
         return $this->fetch();
     }
 
-    public function join(){
+    public function join($id=0){
         if(!is_login()){
-            return false;
+            return "未登录";
         }else{
-        
+           $value =  Db::table('member_activity')->where('uid',is_login())->where('activity_id',$id)->find();
+           if($value){
+                return "已参与";
+           }else{
+                $model = new MemberActivity();
+                $model->uid = is_login();
+                $model->activity_id = $id;
+                $model->save();
+                return 1;
+           }
         }
     }
 }

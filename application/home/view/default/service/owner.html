@@ -29,36 +29,40 @@
     <!--导航结束-->
 
     <div class="container-fluid">
-        <div class="blank"></div>
-        <h3 class="noticeDetailTitle"><strong>{$info.title}</strong></h3>
-        <div class="noticeDetailInfo">发布者:{$info.uid|get_username}</div>
-        <div class="noticeDetailInfo">发布时间：{$info.create_time|date='Y-m-d H:i',###}</div>
-        <a href="javascript:;" class="btn btn-info" id="replay">申请该活动</a>
-        <div class="noticeDetailContent">
-            {$info.content}
-        </div>
+        <form method="post">
+            <div class="form-group">
+                <label>您的姓名(必填):</label>
+                <input type="text" class="form-control" name="name"/>
+            </div>
+            <div class="form-group">
+                <label>你的房号(必填):</label>
+                <input type="text" class="form-control" name="door"/>
+            </div>
+            <div class="form-group">
+                <label>您与业主的关系(必填):</label>
+                <select class="form-control" name="relation">
+                    <option value="0">本人</option>
+                    <option value="1">亲属</option>
+                    <option value="2">租户</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>联系电话(必填):</label>
+                <input type="text" class="form-control" name="tel"/>
+            </div>
+            <div class="form-group">
+                <label>身份证号码(必填):</label>
+                <input type="text" class="form-control" name="number"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary onlineBtn">确认提交</button>
+            </div>
+        </form>
     </div>
-    <input type="hidden" value={$info.id} id="activity">
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="__STATIC__/cute/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="__STATIC__/cute/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(function () {
-    $("#replay").click(function () {
-        var id = $("#activity").val();
-        $.get("{:url('home/activity/join')}",{id:id},function (data) {
-            if(data==1){
-                alert("参加成功");
-            }else if (data=="未登录"){
-                alert("未登录");
-            }else {
-                alert("已参加");
-            }
-        })
-    })
-})
-</script>
 </body>
 </html>
