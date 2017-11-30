@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:70:"D:\www\2think\public/../application/home/view/default/index\index.html";i:1511925238;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1512010775;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:70:"D:\www\2think\public/../application/home/view/default/index\index.html";i:1512039678;s:66:"D:\www\2think\public/../application/home/view/default/nav\nav.html";i:1512010775;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -84,7 +84,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="<?php echo url('home/repair/add'); ?>">
+                        <a href="<?php echo url('home/sale/index'); ?>">
                             <div class="indexLabel label-primary">
                                 <span class="glyphicon glyphicon-usd"></span><br/>
                                 小区租售

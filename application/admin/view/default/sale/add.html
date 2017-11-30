@@ -1,0 +1,192 @@
+{extend name="public/base" /}
+
+
+
+{block name="body"}
+<h1>{$info['id']?'编辑':'新增'}租售</h1>
+
+<script type="text/javascript" src="__PUBLIC__/static/uploadify/jquery.uploadify.min.js"></script>
+
+
+<!-- 标签页导航 -->
+
+    <div class="tab-content">
+        <!-- 表单 -->
+        <form id="form" action="{:url()}" method="post" class="form-horizontal form-inline">
+            <!-- 基础文档模型 -->
+
+            <div class="form-item cf">
+                <div class="controls">
+                     <b>标题</b><br>
+                    <input type="text" class="text input-mid form-control" name="title" value="{$info.title|default=''}" >
+                    <br>
+                    <b>价格</b><br>
+                    <input type="number" class="text input-large form-control" name="price" value="{$info.price|default=''}">
+                    <select name="dw" class="form-control" value="{$info.dw|default=''}">
+                        <option value="1" >元</option>
+                        <option value="10000" >万元</option>
+                    </select>
+                    <br>
+                    <b>类型</b><br>
+                    <select name="type" style="width: 200px" class="form-control" value="{$info.type|default=''}">
+                        <option value="1" >出租</option>
+                        <option value="2" >销售</option>
+                    </select>
+                    <br>
+                    <b>内容</b><br>
+                    <label class="textarea">
+                        <textarea name="content" >{$info.content|default=''}</textarea>
+                        {:hook('adminArticleEdit', array('name'=>content,'value'=>$field['value']))}
+                    </label>
+                    <br>
+                    <b>简单描述</b><br>
+                    <textarea class="form-control" name="desc" style="width: 100%;height: 250px;" >{$info.desc|default=''}</textarea>
+                    <br>
+                    <b>截止日期</b><br>
+                    <input type="text" name="deadline" class="text time form-control" value="{$info.deadline|default=''}" placeholder="请选择时间" />
+                    <br>
+                    <b>联系人电话</b><br>
+                    <input type="text" class="text input-large form-control" name="tel" value="{$info.tel|default=''}">
+                    <br>
+                    <br>
+                    <div class="controls">
+                        <input type="file" id="upload_picture_{$field.name}">
+                        <input type="hidden" name="logo" id="cover_id_{$field.name}" value="{$data[$field['name']]}"/>
+                        <span>建议：200*200像素</span>
+                        <div class="upload-img-box">
+                            <div class="upload-pre-item"><img src="{$info.logo|default=''}"/></div>
+                        </div>
+                    </div>
+                    </div>
+                <input type="hidden" name="id" value="{$info.id|default=''}">
+                    <input type="submit" value="确定" class="btn btn-info col-lg-1">
+
+                    <script type="text/javascript">
+
+                    </script>
+                    <script type="text/javascript">
+                        //上传图片
+                        /* 初始化上传插件 */
+                        $("#upload_picture_{$field.name}").uploadify({
+                            "height"          : 30,
+                            "swf"             : "__PUBLIC__/static/uploadify/uploadify.swf",
+                            "fileObjName"     : "download",
+                            "buttonText"      : "上传图片",
+                            "uploader"        : "{:url('file/uploadpicture',array('session_id'=>session_id()))}",
+                            "width"           : 120,
+                            'removeTimeout'	  : 1,
+                            'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                            "onUploadSuccess" : uploadPicture{$field.name},
+                        'onFallback' : function() {
+                            alert('未检测到兼容版本的Flash.');
+                        }
+                        });
+                        function uploadPicture{$field.name}(file, data){
+                            var data = $.parseJSON(data);
+                            console.debug(data);
+                            var src = '';
+                            if(data.status){
+                                $("#cover_id_{$field.name}").val(data.path);
+                                src = data.url || '__ROOT__' + data.path
+                                $("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
+                                    '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                                );
+                            } else {
+                                updateAlert(data.info);
+                                setTimeout(function(){
+                                    $('#top-alert').find('button').click();
+                                    $(that).removeClass('disabled').prop('disabled',false);
+                                },1500);
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+
+    </form>
+</div>
+</div>
+
+<link href="__PUBLIC__/static/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/static/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">'
+<link href="__PUBLIC__/static/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/static/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+
+    $('#submit').click(function(){
+        $('#form').submit();
+    });
+
+    $(function(){
+        $('.date').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+        $('.time').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+        showTab();
+
+        {if condition="config('open_draftbox') and (ACTION_NAME eq 'add' or $info['status'] eq 3)"}
+        //保存草稿
+        var interval;
+        $('#autoSave').click(function(){
+            var target_form = $(this).attr('target-form');
+            var target = $(this).attr('url')
+            var form = $('.'+target_form);
+            var query = form.serialize();
+            var that = this;
+
+            $(that).addClass('disabled').attr('autocomplete','off').prop('disabled',true);
+            $.post(target,query).success(function(data){
+                if (data.status==1) {
+                    updateAlert(data.info ,'alert-success');
+                    $('input[name=id]').val(data.data.id);
+                }else{
+                    updateAlert(data.info);
+                }
+                setTimeout(function(){
+                    $('#top-alert').find('button').click();
+                    $(that).removeClass('disabled').prop('disabled',false);
+                },1500);
+            })
+
+            //重新开始定时器
+            clearInterval(interval);
+            autoSaveDraft();
+            return false;
+        });
+
+        //Ctrl+S保存草稿
+        $('body').keydown(function(e){
+            if(e.ctrlKey && e.which == 83){
+                $('#autoSave').click();
+                return false;
+            }
+        });
+
+        //每隔一段时间保存草稿
+        function autoSaveDraft(){
+            interval = setInterval(function(){
+                //只有基础信息填写了，才会触发
+                var title = $('input[name=title]').val();
+                var name = $('input[name=name]').val();
+                var des = $('textarea[name=description]').val();
+                if(title != '' || name != '' || des != ''){
+                    $('#autoSave').click();
+                }
+            }, 1000*parseInt({:config('DRAFT_AOTOSAVE_INTERVAL')}));
+        }
+        autoSaveDraft();
+
+        {/if}
+
+        });
+</script>
+{/block}
