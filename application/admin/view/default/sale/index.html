@@ -45,8 +45,8 @@
 						<td>{$repair.uid|get_username}</td>
 						<td>{$repair.tel}</td>
 						<td>{$repair.title}</td>
-                        <td>{$repair.type?'出租':'出售'}</td>
-                        <td>{$repair.price}</td>
+                        <td>{$repair.type==1?'出租':'出售'}</td>
+                        <td>{$repair.price*$repair.dw}</td>
                         <td>{$repair.create_time|time_format}</td>
                         <td>{$repair.deadline|time_format}</td>
                         <td>{$repair.status?'禁用':'发布'}</td>
